@@ -105,7 +105,7 @@ public class PersistentAccountDAO implements AccountDAO {
         if (cursor.moveToFirst()) {
             bal = cursor.getDouble(0);
         } else {
-            throw new InvalidAccountException("Account " + accNo + " is invalid.");
+            throw new InvalidAccountException("Account no : " + accNo + " is Invalid!");
         }
 
         ContentValues values = new ContentValues();
