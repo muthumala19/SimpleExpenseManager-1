@@ -9,16 +9,17 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl.PersistentAccountDAO;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl.PersistentTransactionDAO;
 
 public class PersistentExpenseManager extends ExpenseManager {
-
+    private final Context context;
 
     public PersistentExpenseManager(Context context) throws ExpenseManagerException {
         super();
-        setup(context);
+        this.context = context;
+        setup();
     }
 
 
     @Override
-    public void setup(Context context) {
+    public void setup() {
         TransactionDAO persistentTransactionDAO = new PersistentTransactionDAO(context);
         setTransactionsDAO(persistentTransactionDAO);
         AccountDAO persistentAccountDAO = new PersistentAccountDAO(context);
