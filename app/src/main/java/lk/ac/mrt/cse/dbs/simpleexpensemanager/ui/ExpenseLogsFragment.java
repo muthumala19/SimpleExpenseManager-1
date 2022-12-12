@@ -16,6 +16,8 @@
 
 package lk.ac.mrt.cse.dbs.simpleexpensemanager.ui;
 
+import static lk.ac.mrt.cse.dbs.simpleexpensemanager.Constants.EXPENSE_MANAGER;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -25,6 +27,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,12 +36,14 @@ import lk.ac.mrt.cse.dbs.simpleexpensemanager.R;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.ExpenseManager;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.model.Transaction;
 
-import static lk.ac.mrt.cse.dbs.simpleexpensemanager.Constants.EXPENSE_MANAGER;
 /**
  *
  */
 public class ExpenseLogsFragment extends Fragment {
     private ExpenseManager currentExpenseManager;
+
+    public ExpenseLogsFragment() {
+    }
 
     public static ExpenseLogsFragment newInstance(ExpenseManager expenseManager) {
         ExpenseLogsFragment expenseLogsFragment = new ExpenseLogsFragment();
@@ -46,9 +51,6 @@ public class ExpenseLogsFragment extends Fragment {
         args.putSerializable(EXPENSE_MANAGER, expenseManager);
         expenseLogsFragment.setArguments(args);
         return expenseLogsFragment;
-    }
-
-    public ExpenseLogsFragment() {
     }
 
     @Override
@@ -60,7 +62,11 @@ public class ExpenseLogsFragment extends Fragment {
         currentExpenseManager = (ExpenseManager) getArguments().get(EXPENSE_MANAGER);
         List<Transaction> transactionList = new ArrayList<>();
         if (currentExpenseManager != null) {
-            transactionList = currentExpenseManager.getTransactionLogs();
+            try {
+                transactionList = currentExpenseManager.getTransactionLogs();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         generateTransactionsTable(rootView, logsTableLayout, transactionList);
         return rootView;

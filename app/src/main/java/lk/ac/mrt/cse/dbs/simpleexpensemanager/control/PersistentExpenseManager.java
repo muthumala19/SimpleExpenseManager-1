@@ -5,23 +5,23 @@ import android.content.Context;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.control.exception.ExpenseManagerException;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.AccountDAO;
 import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.TransactionDAO;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl.PersistentAccountDAO;
+import lk.ac.mrt.cse.dbs.simpleexpensemanager.data.impl.PersistentTransactionDAO;
 
-public class PersistentExpenseManager extends ExpenseManager{
-    private final Context context;
+public class PersistentExpenseManager extends ExpenseManager {
+
 
     public PersistentExpenseManager(Context context) throws ExpenseManagerException {
-        super();
-        this.context=context;
-        setup();
+        super(context);
+        setup(context);
     }
 
 
-
     @Override
-    public void setup( ) throws ExpenseManagerException {
-        TransactionDAO persistentTransactionDAO=new PersistentTransacTionDAO(context);
+    public void setup(Context context) {
+        TransactionDAO persistentTransactionDAO = new PersistentTransactionDAO(context);
         setTransactionsDAO(persistentTransactionDAO);
-        AccountDAO persistentAccountDAO=new PersistentAccountDAO(context);
+        AccountDAO persistentAccountDAO = new PersistentAccountDAO(context);
         setAccountsDAO(persistentAccountDAO);
     }
 }
