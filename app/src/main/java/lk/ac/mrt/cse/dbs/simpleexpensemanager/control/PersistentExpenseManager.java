@@ -12,7 +12,7 @@ public class PersistentExpenseManager extends ExpenseManager {
 
 
     public PersistentExpenseManager(Context context) throws ExpenseManagerException {
-        super(context);
+        super();
         setup(context);
     }
 

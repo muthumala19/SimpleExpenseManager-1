@@ -40,8 +40,8 @@ public abstract class ExpenseManager implements Serializable {
     private AccountDAO accountsHolder;
     private TransactionDAO transactionsHolder;
 
-    public ExpenseManager(Context context) {
-    }
+//    public ExpenseManager(Context context) {
+//    }
 
     /***
      * Get list of account numbers as String.
